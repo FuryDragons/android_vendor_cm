@@ -1,6 +1,5 @@
 # Permissions for cmsdk services
 PRODUCT_COPY_FILES += \
-    vendor/furydragons/config/permissions/org.furydragons.appsuggest.xml:system/etc/permissions/org.furydragons.appsuggest.xml \
     vendor/furydragons/config/permissions/org.furydragons.audio.xml:system/etc/permissions/org.furydragons.audio.xml \
     vendor/furydragons/config/permissions/org.furydragons.livedisplay.xml:system/etc/permissions/org.furydragons.livedisplay.xml \
     vendor/furydragons/config/permissions/org.furydragons.partner.xml:system/etc/permissions/org.furydragons.partner.xml \
