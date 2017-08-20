@@ -9,7 +9,6 @@ PRODUCT_COPY_FILES += \
     vendor/furydragons/config/permissions/org.furydragons.profiles.xml:system/etc/permissions/org.furydragons.profiles.xml \
     vendor/furydragons/config/permissions/org.furydragons.statusbar.xml:system/etc/permissions/org.furydragons.statusbar.xml \
     vendor/furydragons/config/permissions/org.furydragons.telephony.xml:system/etc/permissions/org.furydragons.telephony.xml \
-    vendor/furydragons/config/permissions/org.furydragons.theme.xml:system/etc/permissions/org.furydragons.theme.xml \
     vendor/furydragons/config/permissions/org.furydragons.weather.xml:system/etc/permissions/org.furydragons.weather.xml
 
 # FURYDRAGONS Platform Library
