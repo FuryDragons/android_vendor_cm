@@ -2,7 +2,6 @@
 PRODUCT_COPY_FILES += \
     vendor/furydragons/config/permissions/org.furydragons.audio.xml:system/etc/permissions/org.furydragons.audio.xml \
     vendor/furydragons/config/permissions/org.furydragons.livedisplay.xml:system/etc/permissions/org.furydragons.livedisplay.xml \
-    vendor/furydragons/config/permissions/org.furydragons.partner.xml:system/etc/permissions/org.furydragons.partner.xml \
     vendor/furydragons/config/permissions/org.furydragons.performance.xml:system/etc/permissions/org.furydragons.performance.xml \
     vendor/furydragons/config/permissions/org.furydragons.profiles.xml:system/etc/permissions/org.furydragons.profiles.xml \
     vendor/furydragons/config/permissions/org.furydragons.statusbar.xml:system/etc/permissions/org.furydragons.statusbar.xml \
