@@ -41,7 +41,7 @@ $(cmsdk-test-coverage-report): PRIVATE_CMSDK_API_COVERAGE_EXE := $(cmsdk_api_cov
 $(cmsdk-test-coverage-report): PRIVATE_DEXDEPS_EXE := $(dexdeps_exe)
 $(cmsdk-test-coverage-report): PRIVATE_API_XML_DESC := $(api_xml_description)
 $(cmsdk-test-coverage-report): $(cmsdk_tests_apk) $(cmsettingsprovider_tests_apk) $(cmsdk_api_coverage_dependencies) | $(ACP)
-	$(call generate-cm-coverage-report,"CMSDK API Coverage Report",\
+	$(call generate-furydragons-coverage-report,"CMSDK API Coverage Report",\
 			$(PRIVATE_TEST_CASES),html)
 
 .PHONY: cmsdk-test-coverage
@@ -56,9 +56,9 @@ endif
 #  1 - Name of the report printed out on the screen
 #  2 - List of apk files that will be scanned to generate the report
 #  3 - Format of the report
-define generate-cm-coverage-report
+define generate-furydragons-coverage-report
 	$(hide) mkdir -p $(dir $@)
-	$(hide) $(PRIVATE_CMSDK_API_COVERAGE_EXE) -d $(PRIVATE_DEXDEPS_EXE) -a $(PRIVATE_API_XML_DESC) -f $(3) -o $@ $(2) -cm
+	$(hide) $(PRIVATE_CMSDK_API_COVERAGE_EXE) -d $(PRIVATE_DEXDEPS_EXE) -a $(PRIVATE_API_XML_DESC) -f $(3) -o $@ $(2) -furydragons
 	@ echo $(1): file://$@
 endef
 

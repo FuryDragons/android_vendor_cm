@@ -1,11 +1,11 @@
-# Inherit common CM stuff
-$(call inherit-product, vendor/cm/config/common_full.mk)
+# Inherit common FURYDRAGONS stuff
+$(call inherit-product, vendor/furydragons/config/common_full.mk)
 
-# Required CM packages
+# Required FURYDRAGONS packages
 PRODUCT_PACKAGES += \
     LatinIME
 
-# Include CM LatinIME dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/dictionaries
+# Include FURYDRAGONS LatinIME dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/furydragons/overlay/dictionaries
 
-$(call inherit-product, vendor/cm/config/telephony.mk)
+$(call inherit-product, vendor/furydragons/config/telephony.mk)
