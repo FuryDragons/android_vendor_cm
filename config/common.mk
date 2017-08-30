@@ -1,4 +1,4 @@
-PRODUCT_BRAND ?= LineageOS
+PRODUCT_BRAND ?= FuryDragons
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -82,7 +82,7 @@ PRODUCT_COPY_FILES += \
     vendor/furydragons/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
 # Include FURYDRAGONS audio files
-include vendor/furydragons/config/cm_audio.mk
+include vendor/furydragons/config/furydragons_audio.mk
 
 # Theme engine
 include vendor/furydragons/config/themes_common.mk
@@ -242,84 +242,84 @@ PRODUCT_VERSION_MINOR = 1
 PRODUCT_VERSION_MAINTENANCE := 0
 
 ifeq ($(TARGET_VENDOR_SHOW_MAINTENANCE_VERSION),true)
-    CM_VERSION_MAINTENANCE := $(PRODUCT_VERSION_MAINTENANCE)
+    FURYDRAGONS_VERSION_MAINTENANCE := $(PRODUCT_VERSION_MAINTENANCE)
 else
-    CM_VERSION_MAINTENANCE := 0
+    FURYDRAGONS_VERSION_MAINTENANCE := 0
 endif
 
-# Set CM_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
+# Set FURYDRAGONS_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
 
-ifndef CM_BUILDTYPE
+ifndef FURYDRAGONS_BUILDTYPE
     ifdef RELEASE_TYPE
-        # Starting with "CM_" is optional
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^CM_||g')
-        CM_BUILDTYPE := $(RELEASE_TYPE)
+        # Starting with "FURYDRAGONS_" is optional
+        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^FURYDRAGONS_||g')
+        FURYDRAGONS_BUILDTYPE := $(RELEASE_TYPE)
     endif
 endif
 
 # Filter out random types, so it'll reset to UNOFFICIAL
-ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(CM_BUILDTYPE)),)
-    CM_BUILDTYPE :=
+ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(FURYDRAGONS_BUILDTYPE)),)
+    FURYDRAGONS_BUILDTYPE :=
 endif
 
-ifdef CM_BUILDTYPE
-    ifneq ($(CM_BUILDTYPE), SNAPSHOT)
-        ifdef CM_EXTRAVERSION
+ifdef FURYDRAGONS_BUILDTYPE
+    ifneq ($(FURYDRAGONS_BUILDTYPE), SNAPSHOT)
+        ifdef FURYDRAGONS_EXTRAVERSION
             # Force build type to EXPERIMENTAL
-            CM_BUILDTYPE := EXPERIMENTAL
-            # Remove leading dash from CM_EXTRAVERSION
-            CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
-            # Add leading dash to CM_EXTRAVERSION
-            CM_EXTRAVERSION := -$(CM_EXTRAVERSION)
+            FURYDRAGONS_BUILDTYPE := EXPERIMENTAL
+            # Remove leading dash from FURYDRAGONS_EXTRAVERSION
+            FURYDRAGONS_EXTRAVERSION := $(shell echo $(FURYDRAGONS_EXTRAVERSION) | sed 's/-//')
+            # Add leading dash to FURYDRAGONS_EXTRAVERSION
+            FURYDRAGONS_EXTRAVERSION := -$(FURYDRAGONS_EXTRAVERSION)
         endif
     else
-        ifndef CM_EXTRAVERSION
+        ifndef FURYDRAGONS_EXTRAVERSION
             # Force build type to EXPERIMENTAL, SNAPSHOT mandates a tag
-            CM_BUILDTYPE := EXPERIMENTAL
+            FURYDRAGONS_BUILDTYPE := EXPERIMENTAL
         else
-            # Remove leading dash from CM_EXTRAVERSION
-            CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
-            # Add leading dash to CM_EXTRAVERSION
-            CM_EXTRAVERSION := -$(CM_EXTRAVERSION)
+            # Remove leading dash from FURYDRAGONS_EXTRAVERSION
+            FURYDRAGONS_EXTRAVERSION := $(shell echo $(FURYDRAGONS_EXTRAVERSION) | sed 's/-//')
+            # Add leading dash to FURYDRAGONS_EXTRAVERSION
+            FURYDRAGONS_EXTRAVERSION := -$(FURYDRAGONS_EXTRAVERSION)
         endif
     endif
 else
-    # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
-    CM_BUILDTYPE := UNOFFICIAL
-    CM_EXTRAVERSION :=
+    # If FURYDRAGONS_BUILDTYPE is not defined, set to UNOFFICIAL
+    FURYDRAGONS_BUILDTYPE := UNOFFICIAL
+    FURYDRAGONS_EXTRAVERSION :=
 endif
 
-ifeq ($(CM_BUILDTYPE), UNOFFICIAL)
+ifeq ($(FURYDRAGONS_BUILDTYPE), UNOFFICIAL)
     ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        CM_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
+        FURYDRAGONS_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
     endif
 endif
 
-ifeq ($(CM_BUILDTYPE), RELEASE)
+ifeq ($(FURYDRAGONS_BUILDTYPE), RELEASE)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+        FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(FURYDRAGONS_BUILD)
     else
         ifeq ($(TARGET_BUILD_VARIANT),user)
-            ifeq ($(CM_VERSION_MAINTENANCE),0)
-                FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+            ifeq ($(FURYDRAGONS_VERSION_MAINTENANCE),0)
+                FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(FURYDRAGONS_BUILD)
             else
-                FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+                FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(FURYDRAGONS_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(FURYDRAGONS_BUILD)
             endif
         else
-            FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+            FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(FURYDRAGONS_BUILD)
         endif
     endif
 else
-    ifeq ($(CM_VERSION_MAINTENANCE),0)
-        FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+    ifeq ($(FURYDRAGONS_VERSION_MAINTENANCE),0)
+        FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(FURYDRAGONS_BUILDTYPE)$(FURYDRAGONS_EXTRAVERSION)-$(FURYDRAGONS_BUILD)
     else
-        FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+        FURYDRAGONS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(FURYDRAGONS_VERSION_MAINTENANCE)-$(shell date -u +%Y%m%d)-$(FURYDRAGONS_BUILDTYPE)$(FURYDRAGONS_EXTRAVERSION)-$(FURYDRAGONS_BUILD)
     endif
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.furydragons.version=$(FURYDRAGONS_VERSION) \
-    ro.furydragons.releasetype=$(CM_BUILDTYPE) \
+    ro.furydragons.releasetype=$(FURYDRAGONS_BUILDTYPE) \
     ro.furydragons.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
     ro.modversion=$(FURYDRAGONS_VERSION) \
     ro.cmlegal.url=https://lineageos.org/legal
@@ -329,33 +329,33 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
 
 -include vendor/furydragons-priv/keys/keys.mk
 
-CM_DISPLAY_VERSION := $(FURYDRAGONS_VERSION)
+FURYDRAGONS_DISPLAY_VERSION := $(FURYDRAGONS_VERSION)
 
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-    ifneq ($(CM_BUILDTYPE), UNOFFICIAL)
+    ifneq ($(FURYDRAGONS_BUILDTYPE), UNOFFICIAL)
         ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-            ifneq ($(CM_EXTRAVERSION),)
-                # Remove leading dash from CM_EXTRAVERSION
-                CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
-                TARGET_VENDOR_RELEASE_BUILD_ID := $(CM_EXTRAVERSION)
+            ifneq ($(FURYDRAGONS_EXTRAVERSION),)
+                # Remove leading dash from FURYDRAGONS_EXTRAVERSION
+                FURYDRAGONS_EXTRAVERSION := $(shell echo $(FURYDRAGONS_EXTRAVERSION) | sed 's/-//')
+                TARGET_VENDOR_RELEASE_BUILD_ID := $(FURYDRAGONS_EXTRAVERSION)
             else
                 TARGET_VENDOR_RELEASE_BUILD_ID := $(shell date -u +%Y%m%d)
             endif
         else
             TARGET_VENDOR_RELEASE_BUILD_ID := $(TARGET_VENDOR_RELEASE_BUILD_ID)
         endif
-        ifeq ($(CM_VERSION_MAINTENANCE),0)
-            CM_DISPLAY_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+        ifeq ($(FURYDRAGONS_VERSION_MAINTENANCE),0)
+            FURYDRAGONS_DISPLAY_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(FURYDRAGONS_BUILD)
         else
-            CM_DISPLAY_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+            FURYDRAGONS_DISPLAY_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(FURYDRAGONS_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(FURYDRAGONS_BUILD)
         endif
     endif
 endif
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.furydragons.display.version=$(CM_DISPLAY_VERSION)
+    ro.furydragons.display.version=$(FURYDRAGONS_DISPLAY_VERSION)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/furydragons/config/partner_gms.mk
