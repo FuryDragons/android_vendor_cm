@@ -46,9 +46,9 @@ endif
 
 # CyanogenMod Platform SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.furydragons.build.version.plat.sdk=$(CM_PLATFORM_SDK_VERSION)
+  ro.fds.build.version.plat.sdk=$(CM_PLATFORM_SDK_VERSION)
 
 # CyanogenMod Platform Internal
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.furydragons.build.version.plat.rev=$(CM_PLATFORM_REV)
+  ro.fds.build.version.plat.rev=$(CM_PLATFORM_REV)
 
