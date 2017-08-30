@@ -1,5 +1,5 @@
-# Inherit common CM stuff
-$(call inherit-product, vendor/cm/config/common.mk)
+# Inherit common FURYDRAGONS stuff
+$(call inherit-product, vendor/furydragons/config/common.mk)
 
 PRODUCT_SIZE := full
 

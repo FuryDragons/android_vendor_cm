@@ -1,5 +1,5 @@
 #
-#CM-specific variable clears
+#FURYDRAGONS-specific variable clears
 #
 LOCAL_IGNORE_SUBDIR :=
 

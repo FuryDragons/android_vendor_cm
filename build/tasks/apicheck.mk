@@ -20,30 +20,30 @@
 # skip api check for PDK buid
 ifeq (,$(filter true, $(WITHOUT_CHECK_API) $(TARGET_BUILD_PDK) $(TARGET_DISABLE_CMSDK)))
 
-.PHONY: checkapi-cm
+.PHONY: checkapi-furydragons
 
 # Run the checkapi rules by default.
-droidcore: checkapi-cm
+droidcore: checkapi-furydragons
 
 # Validate against previous release platform sdk version api text within prebuilts
 cm_last_released_sdk_version := $(CM_PLATFORM_SDK_VERSION)
 
-.PHONY: check-cm-public-api
-checkapi-cm : check-cm-public-api
+.PHONY: check-furydragons-public-api
+checkapi-furydragons : check-furydragons-public-api
 
-.PHONY: update-cm-api
+.PHONY: update-furydragons-api
 
 # INTERNAL_CM_PLATFORM_API_FILE is the one build by droiddoc.
 # Note that since INTERNAL_CM_PLATFORM_API_FILE  is the byproduct of api-stubs module,
 # (See vendor/cmsdk/Android.mk)
 # we need to add api-stubs as additional dependency of the api check.
 
-$(INTERNAL_CM_PLATFORM_API_FILE): cm-api-stubs-docs
+$(INTERNAL_CM_PLATFORM_API_FILE): furydragons-api-stubs-docs
 
 # Check that the API we're building hasn't broken the last-released
 # SDK version.
 $(eval $(call check-api, \
-    checkpublicapi-cm-last, \
+    checkpublicapi-furydragons-last, \
     $(CM_SRC_API_DIR)/$(cm_last_released_sdk_version).txt, \
     $(INTERNAL_CM_PLATFORM_API_FILE), \
     $(FRAMEWORK_CM_PLATFORM_REMOVED_API_FILE), \
@@ -52,14 +52,14 @@ $(eval $(call check-api, \
     -error 7 -error 8 -error 9 -error 10 -error 11 -error 12 -error 13 -error 14 -error 15 \
     -error 16 -error 17 -error 18 , \
     cat $(FRAMEWORK_CM_API_NEEDS_UPDATE_TEXT), \
-    check-cm-public-api, \
-    $(call doc-timestamp-for,cm-api-stubs) \
+    check-furydragons-public-api, \
+    $(call doc-timestamp-for,furydragons-api-stubs) \
     ))
 
 # Check that the API we're building hasn't changed from the not-yet-released
 # SDK version.
 $(eval $(call check-api, \
-    checkpublicapi-cm-current, \
+    checkpublicapi-furydragons-current, \
     $(FRAMEWORK_CM_PLATFORM_API_FILE), \
     $(INTERNAL_CM_PLATFORM_API_FILE), \
     $(FRAMEWORK_CM_PLATFORM_REMOVED_API_FILE), \
@@ -69,23 +69,23 @@ $(eval $(call check-api, \
     -error 16 -error 17 -error 18 -error 19 -error 20 -error 21 -error 23 -error 24 \
     -error 25 -error 26 -error 27, \
     cat $(FRAMEWORK_CM_API_NEEDS_UPDATE_TEXT), \
-    check-cm-public-api, \
-    $(call doc-timestamp-for,cm-api-stubs) \
+    check-furydragons-public-api, \
+    $(call doc-timestamp-for,furydragons-api-stubs) \
     ))
 
-.PHONY: update-cm-public-api
-update-cm-public-api: $(INTERNAL_CM_PLATFORM_API_FILE) | $(ACP)
+.PHONY: update-furydragons-public-api
+update-furydragons-public-api: $(INTERNAL_CM_PLATFORM_API_FILE) | $(ACP)
 	@echo "Copying cm_current.txt"
 	$(hide) $(ACP) $(INTERNAL_CM_PLATFORM_API_FILE) $(FRAMEWORK_CM_PLATFORM_API_FILE)
 	@echo "Copying cm_removed.txt"
 	$(hide) $(ACP) $(INTERNAL_CM_PLATFORM_REMOVED_API_FILE) $(FRAMEWORK_CM_PLATFORM_REMOVED_API_FILE)
 
-update-cm-api : update-cm-public-api
+update-furydragons-api : update-furydragons-public-api
 
-.PHONY: update-cm-prebuilts-latest-public-api
+.PHONY: update-furydragons-prebuilts-latest-public-api
 current_sdk_release_text_file := $(CM_SRC_API_DIR)/$(cm_last_released_sdk_version).txt
 
-update-cm-prebuilts-latest-public-api: $(FRAMEWORK_CM_PLATFORM_API_FILE) | $(ACP)
+update-furydragons-prebuilts-latest-public-api: $(FRAMEWORK_CM_PLATFORM_API_FILE) | $(ACP)
 	@echo "Publishing cm_current.txt as latest API release"
 	$(hide) $(ACP) $(FRAMEWORK_CM_PLATFORM_API_FILE) $(current_sdk_release_text_file)
 

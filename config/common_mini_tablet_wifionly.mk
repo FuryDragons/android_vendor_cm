@@ -1,6 +1,6 @@
-# Inherit common CM stuff
-$(call inherit-product, vendor/cm/config/common_mini.mk)
+# Inherit common FURYDRAGONS stuff
+$(call inherit-product, vendor/furydragons/config/common_mini.mk)
 
-# Required CM packages
+# Required FURYDRAGONS packages
 PRODUCT_PACKAGES += \
     LatinIME
