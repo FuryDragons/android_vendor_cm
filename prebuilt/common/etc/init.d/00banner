@@ -4,10 +4,10 @@
 #
 L="log -p i -t furydragons"
 
-$L "_ _                                       "
-$L "| (_)_ __   ___  __ _  __ _  ___  ___  ___ "
-$L "| | | '_ \\ / _ \\/ _\` |/ _\` |/ _ \\/ _ \\/ __|"
-$L "| | | | | |  __/ (_| | (_| |  __/ (_) \\__ \\"
-$L "|_|_|_| |_|\\___|\\__,_|\\__, |\\___|\\___/|___/"
-$L "                      |___/"
-$L "Welcome to Android `getprop ro.build.version.release` / LineageOS-`getprop ro.furydragons.version`";
+$L "  _____                 ____                                   "
+$L " |  ___|   _ _ __ _   _|  _ \ _ __ __ _  __ _  ___  _ __  ___  "
+$L " | |_ | | | | '__| | | | | | | '__/ _` |/ _` |/ _ \| '_ \/ __| "
+$L " |  _|| |_| | |  | |_| | |_| | | | (_| | (_| | (_) | | | \__ \ "
+$L " |_|   \__,_|_|   \__, |____/|_|  \__,_|\__, |\___/|_| |_|___/ "
+$L "                  |___/                 |___/                  "
+$L "Welcome to Android `getprop ro.build.version.release` / FuryDragons-`getprop ro.furydragons.version`";

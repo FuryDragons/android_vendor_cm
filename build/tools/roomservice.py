@@ -52,7 +52,7 @@ except:
     device = product
 
 if not depsonly:
-    print("Device %s not found. Attempting to retrieve device repository from LineageOS Github (http://github.com/LineageOS)." % device)
+    print("Device %s not found. Attempting to retrieve device repository from FuryDragons Github (http://github.com/FuryDragons)." % device)
 
 repositories = []
 
@@ -72,7 +72,7 @@ def add_auth(githubreq):
         githubreq.add_header("Authorization","Basic %s" % githubauth)
 
 if not depsonly:
-    githubreq = urllib.request.Request("https://api.github.com/search/repositories?q=%s+user:LineageOS+in:name+fork:true" % device)
+    githubreq = urllib.request.Request("https://api.github.com/search/repositories?q=%s+user:FuryDragons+in:name+fork:true" % device)
     add_auth(githubreq)
     try:
         result = json.loads(urllib.request.urlopen(githubreq).read().decode())
@@ -110,28 +110,28 @@ def indent(elem, level=0):
         if level and (not elem.tail or not elem.tail.strip()):
             elem.tail = i
 
-def get_default_revision():
+def get_Fury_revision():
     m = ElementTree.parse(".repo/manifest.xml")
-    d = m.findall('default')[0]
+    d = m.findall('Fury')[0]
     r = d.get('revision')
     return r.replace('refs/heads/', '').replace('refs/tags/', '')
 
 def get_from_manifest(devicename):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/roomservice.xml")
+        lm = ElementTree.parse(".repo/local_manifests/furydragons.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
 
     for localpath in lm.findall("project"):
-        if re.search("android_device_.*_%s$" % device, localpath.get("name")):
+        if re.search("device_.*_%s$" % device, localpath.get("name")):
             return localpath.get("path")
 
     return None
 
 def is_in_manifest(projectpath):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/roomservice.xml")
+        lm = ElementTree.parse(".repo/local_manifests/furydragons.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -166,7 +166,7 @@ def is_in_manifest(projectpath):
 
 def add_to_manifest(repositories, fallback_branch = None):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/roomservice.xml")
+        lm = ElementTree.parse(".repo/local_manifests/furydragons.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -176,12 +176,12 @@ def add_to_manifest(repositories, fallback_branch = None):
         repo_target = repository['target_path']
         print('Checking if %s is fetched from %s' % (repo_target, repo_name))
         if is_in_manifest(repo_target):
-            print('LineageOS/%s already fetched to %s' % (repo_name, repo_target))
+            print('FuryDragons/%s already fetched to %s' % (repo_name, repo_target))
             continue
 
-        print('Adding dependency: LineageOS/%s -> %s' % (repo_name, repo_target))
+        print('Adding dependency: FuryDragons/%s -> %s' % (repo_name, repo_target))
         project = ElementTree.Element("project", attrib = { "path": repo_target,
-            "remote": "github", "name": "LineageOS/%s" % repo_name })
+            "remote": "github", "name": "FuryDragons/%s" % repo_name })
 
         if 'branch' in repository:
             project.set('revision',repository['branch'])
@@ -189,7 +189,7 @@ def add_to_manifest(repositories, fallback_branch = None):
             print("Using fallback branch %s for %s" % (fallback_branch, repo_name))
             project.set('revision', fallback_branch)
         else:
-            print("Using default branch for %s" % repo_name)
+            print("Using Fury branch for %s" % repo_name)
 
         lm.append(project)
 
@@ -197,7 +197,7 @@ def add_to_manifest(repositories, fallback_branch = None):
     raw_xml = ElementTree.tostring(lm).decode()
     raw_xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + raw_xml
 
-    f = open('.repo/local_manifests/roomservice.xml', 'w')
+    f = open('.repo/local_manifests/furydragons.xml', 'w')
     f.write(raw_xml)
     f.close()
 
@@ -219,7 +219,7 @@ def fetch_dependencies(repo_path, fallback_branch = None):
                     fetch_list.append(dependency)
                     syncable_repos.append(dependency['target_path'])
                     verify_repos.append(dependency['target_path'])
-                elif re.search("android_device_.*_.*$", dependency['repository']):
+                elif re.search("device_.*_.*$", dependency['repository']):
                     verify_repos.append(dependency['target_path'])
 
             dependencies_file.close()
@@ -255,20 +255,20 @@ if depsonly:
 else:
     for repository in repositories:
         repo_name = repository['name']
-        if re.match(r"^android_device_[^_]*_" + device + "$", repo_name):
+        if re.match(r"^device_[^_]*_" + device + "$", repo_name):
             print("Found repository: %s" % repository['name'])
             
-            manufacturer = repo_name.replace("android_device_", "").replace("_" + device, "")
+            manufacturer = repo_name.replace("device_", "").replace("_" + device, "")
             
-            default_revision = get_default_revision()
-            print("Default revision: %s" % default_revision)
+            Fury_revision = get_Fury_revision()
+            print("Fury revision: %s" % Fury_revision)
             print("Checking branch info")
             githubreq = urllib.request.Request(repository['branches_url'].replace('{/branch}', ''))
             add_auth(githubreq)
             result = json.loads(urllib.request.urlopen(githubreq).read().decode())
 
             ## Try tags, too, since that's what releases use
-            if not has_branch(result, default_revision):
+            if not has_branch(result, Fury_revision):
                 githubreq = urllib.request.Request(repository['tags_url'].replace('{/tag}', ''))
                 add_auth(githubreq)
                 result.extend (json.loads(urllib.request.urlopen(githubreq).read().decode()))
@@ -277,7 +277,7 @@ else:
             adding = {'repository':repo_name,'target_path':repo_path}
             
             fallback_branch = None
-            if not has_branch(result, default_revision):
+            if not has_branch(result, Fury_revision):
                 if os.getenv('ROOMSERVICE_BRANCHES'):
                     fallbacks = list(filter(bool, os.getenv('ROOMSERVICE_BRANCHES').split(' ')))
                     for fallback in fallbacks:
@@ -287,7 +287,7 @@ else:
                             break
 
                 if not fallback_branch:
-                    print("Default revision %s not found in %s. Bailing." % (default_revision, repo_name))
+                    print("Fury revision %s not found in %s. Bailing." % (Fury_revision, repo_name))
                     print("Branches found:")
                     for branch in [branch['name'] for branch in result]:
                         print(branch)
@@ -304,4 +304,4 @@ else:
             print("Done")
             sys.exit()
 
-print("Repository for %s not found in the LineageOS Github repository list. If this is in error, you may need to manually add it to your local_manifests/roomservice.xml." % device)
+print("Repository for %s not found in the FuryDragons Github repository list. If this is in error, you may need to manually add it to your local_manifests/furydragons.xml." % device)
