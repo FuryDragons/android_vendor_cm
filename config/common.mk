@@ -126,14 +126,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     AudioFX \
     CMSettingsProvider \
-    LineageSetupWizard \
     Eleven \
     ExactCalculator \
     Jelly \
     LiveLockScreenService \
     LockClock \
     Trebuchet \
-    Updater \
     WallpaperPicker \
     WeatherProvider
 
@@ -237,7 +235,7 @@ endif
 
 DEVICE_PACKAGE_OVERLAYS += vendor/furydragons/overlay/common
 
-PRODUCT_VERSION_MAJOR = 14
+PRODUCT_VERSION_MAJOR = 7
 PRODUCT_VERSION_MINOR = 1
 PRODUCT_VERSION_MAINTENANCE := 0
 
@@ -360,5 +358,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/furydragons/config/partner_gms.mk
 -include vendor/cyngn/product.mk
+-include vendor/furydragons/config/furydragons.mk
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)
