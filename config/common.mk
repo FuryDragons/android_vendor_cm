@@ -84,9 +84,6 @@ PRODUCT_COPY_FILES += \
 # Include FURYDRAGONS audio files
 include vendor/furydragons/config/furydragons_audio.mk
 
-# Theme engine
-include vendor/furydragons/config/themes_common.mk
-
 ifneq ($(TARGET_DISABLE_CMSDK), true)
 # CMSDK
 include vendor/furydragons/config/cmsdk_common.mk
@@ -358,6 +355,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/furydragons/config/partner_gms.mk
 -include vendor/cyngn/product.mk
+
+# Include FuryDragons Makefile
 -include vendor/furydragons/config/furydragons.mk
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)
