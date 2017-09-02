@@ -3,9 +3,10 @@
 # Inherit common FuryDragons stuff
 
 # Required FuryDragons packages
-+PRODUCT_PACKAGES += \
-FuryDragonsSetupWizard \
-FuryDragonsWallpapers
+PRODUCT_PACKAGES += \
+DragonSetupWizard \
+DragonWallpapers \
+DragonFileManager
 
 #Required FuryDragons Files
-+PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \

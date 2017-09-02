@@ -79,7 +79,7 @@ PRODUCT_COPY_FILES += \
 
 # This is FURYDRAGONS!
 PRODUCT_COPY_FILES += \
-    vendor/furydragons/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
+    vendor/furydragons/config/permissions/com.furydragons.android.xml:system/etc/permissions/com.furydragons.android.xml
 
 # Include FURYDRAGONS audio files
 include vendor/furydragons/config/furydragons_audio.mk
@@ -111,9 +111,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libemoji \
     LiveWallpapersPicker \
-    PhotoTable \
-    Terminal
-
+    PhotoTable 
+	
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
@@ -126,7 +125,6 @@ PRODUCT_PACKAGES += \
     Eleven \
     ExactCalculator \
     Jelly \
-    LiveLockScreenService \
     LockClock \
     Trebuchet \
     WallpaperPicker \
@@ -233,8 +231,8 @@ endif
 DEVICE_PACKAGE_OVERLAYS += vendor/furydragons/overlay/common
 
 PRODUCT_VERSION_MAJOR = 7
-PRODUCT_VERSION_MINOR = 1
-PRODUCT_VERSION_MAINTENANCE := 0
+PRODUCT_VERSION_MINOR = 2
+PRODUCT_VERSION_MAINTENANCE := 1
 
 ifeq ($(TARGET_VENDOR_SHOW_MAINTENANCE_VERSION),true)
     FURYDRAGONS_VERSION_MAINTENANCE := $(PRODUCT_VERSION_MAINTENANCE)

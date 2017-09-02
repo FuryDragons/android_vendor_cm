@@ -15,6 +15,6 @@
 -->
 
 <permissions>
-    <feature name="org.cyanogenmod.livelockscreen" />
+    <feature name="org.furydragons.livelockscreen" />
 </permissions>
 
