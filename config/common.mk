@@ -75,7 +75,7 @@ PRODUCT_COPY_FILES += \
 
 # This is FURYDRAGONS!
 PRODUCT_COPY_FILES += \
-    vendor/furydragons/config/permissions/com.furydragons.android.xml:system/etc/permissions/com.furydragons.android.xml
+    vendor/furydragons/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
 # Include FURYDRAGONS audio files
 include vendor/furydragons/config/furydragons_audio.mk
@@ -108,7 +108,7 @@ PRODUCT_PACKAGES += \
     libemoji \
     LiveWallpapersPicker \
     PhotoTable 
-	
+
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \

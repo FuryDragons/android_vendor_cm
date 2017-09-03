@@ -19,5 +19,5 @@
         part of the external furydragons service init in SystemServer. If this xml isn't present
         on the device, the service will not be published as a binder service!
     -->
-    <feature name="org.furydragons.audio" />
+    <feature name="org.cyanogenmod.performance" />
 </permissions>

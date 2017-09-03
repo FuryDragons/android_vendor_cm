@@ -1,12 +1,12 @@
 # Permissions for cmsdk services
 PRODUCT_COPY_FILES += \
-    vendor/furydragons/config/permissions/org.furydragons.audio.xml:system/etc/permissions/org.furydragons.audio.xml \
-    vendor/furydragons/config/permissions/org.furydragons.livedisplay.xml:system/etc/permissions/org.furydragons.livedisplay.xml \
-    vendor/furydragons/config/permissions/org.furydragons.performance.xml:system/etc/permissions/org.furydragons.performance.xml \
-    vendor/furydragons/config/permissions/org.furydragons.profiles.xml:system/etc/permissions/org.furydragons.profiles.xml \
-    vendor/furydragons/config/permissions/org.furydragons.statusbar.xml:system/etc/permissions/org.furydragons.statusbar.xml \
-    vendor/furydragons/config/permissions/org.furydragons.telephony.xml:system/etc/permissions/org.furydragons.telephony.xml \
-    vendor/furydragons/config/permissions/org.furydragons.weather.xml:system/etc/permissions/org.furydragons.weather.xml
+    vendor/furydragons/config/permissions/org.cyanogenmod.appsuggest.xml:system/etc/permissions/org.cyanogenmod.appsuggest.xml \
+    vendor/furydragons/config/permissions/org.cyanogenmod.audio.xml:system/etc/permissions/org.cyanogenmod.audio.xml \
+    vendor/furydragons/config/permissions/org.cyanogenmod.performance.xml:system/etc/permissions/org.cyanogenmod.performance.xml \
+    vendor/furydragons/config/permissions/org.cyanogenmod.profiles.xml:system/etc/permissions/org.cyanogenmod.profiles.xml \
+    vendor/furydragons/config/permissions/org.cyanogenmod.statusbar.xml:system/etc/permissions/org.cyanogenmod.statusbar.xml \
+    vendor/furydragons/config/permissions/org.cyanogenmod.telephony.xml:system/etc/permissions/org.cyanogenmod.telephony.xml \
+    vendor/furydragons/config/permissions/org.cyanogenmod.weather.xml:system/etc/permissions/org.cyanogenmod.weather.xml
 
 # FURYDRAGONS Platform Library
 PRODUCT_PACKAGES += \
