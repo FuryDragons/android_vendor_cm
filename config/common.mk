@@ -311,7 +311,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.furydragons.releasetype=$(FURYDRAGONS_BUILDTYPE) \
     ro.furydragons.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
     ro.modversion=$(FURYDRAGONS_VERSION) \
-    ro.cmlegal.url=https://lineageos.org/legal
 
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/furydragons/build/target/product/security/furydragons
